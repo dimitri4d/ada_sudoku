@@ -1,0 +1,119 @@
+V "GNAT Lib v4.6"
+M P W=b
+P SS ZX
+R nnnnnnnnnnvnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+
+U sudoku%b		sudoku.adb		f33c3ed0 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W ada.strings.unbounded.text_io%s  a-suteio.adb	a-suteio.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W stack%s		stack.adb		stack.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-charac.ads		20070912115821 2d3ec45b
+D a-chlat1.ads		20070912115821 2825df20
+D a-except.ads		20090727140100 0c711ac9
+D a-finali.ads		20090409150019 e5e85fa4
+D a-filico.ads		20090409150019 872dc219
+D a-inteio.ads		20070406091342 f64b89a4
+D a-ioexce.ads		20091130110856 8b9de6cd
+D a-stream.ads		20090409150019 2ca4ee37
+D a-string.ads		20070406091342 90ac6797
+D a-strmap.ads		20090409150019 9cb836fb
+D a-strunb.ads		20101220072657 e684739b
+D a-suteio.ads		20090409150019 26d8e9aa
+D a-tags.ads		20101021101406 c7695348
+D a-textio.ads		20091028140912 386df5d4
+D a-tiinio.ads		20090409150019 aa04e5d6
+D a-unccon.ads		20070406091342 f9eb8f06
+D interfac.ads		20090409150019 f77d8799
+D i-cstrea.ads		20100622165701 1bd72c32
+D stack.ads		20160302073844 9fb415cb
+D sudoku.adb		20160303071847 62f2cd5a
+D system.ads		20140416172229 23e1f70b
+D s-crtl.ads		20100617122610 ac77b159
+D s-exctab.ads		20090417131547 66e51330
+D s-ficobl.ads		20100909103250 443b9d66
+D s-finimp.ads		20090409150019 46853fe8
+D s-finroo.ads		20090409150019 dbb860c9
+D s-parame.ads		20091130110856 9c5d83fa
+D s-secsta.ads		20090707124243 eea35a36
+D s-soflin.ads		20090729085153 9414c974
+D s-stache.ads		20090417130712 596fc1b4
+D s-stalib.ads		20101021102512 c4241c00
+D s-stoele.ads		20090417130712 facd7d98
+D s-stoele.adb		20100617152355 afc5dc80
+D s-stratt.ads		20100909123135 aedef97e
+D s-traent.ads		20090417130712 5221ee41
+D s-unstyp.ads		20090409150019 6ae15c76
+D s-wchcon.ads		20090417130712 bfeb2e3d
+X 1 ada.ads
+16K9*Ada 19e8 21|3r6 3r23 4r6 4r31 5r6 5r33 6r6 6r41
+X 7 a-inteio.ads
+18K13*Integer_Text_IO[16|45] 21|4w10 4r35
+X 10 a-string.ads
+16K13*Strings 35e16 21|5r10 5r37 6r10 6r45
+X 12 a-strunb.ads
+77K21*Unbounded 490e26 21|5w18 5r45 6r18 6r53
+X 13 a-suteio.ads
+39K31*Text_IO 61e34 21|6w28 6r63
+X 15 a-textio.ads
+49K13*Text_IO 472e16 21|3w10 3r27
+52P9*File_Type(370R9) 21|14r16 15r17
+53n23*In_File{53E9} 21|111r20
+53n32*Out_File{53E9} 21|125r24
+74I12*Field{integer}
+87U14*Create 21|125s9
+93U14*Open 21|111s9
+99U14*Close 21|122s9
+167U14*New_Line 21|79s25 91s33 97s25 149s9 153s25 165s33 171s25
+184V13*End_Of_File{boolean} 21|114s27
+206U14*Get 21|115s17
+209U14*Put 21|183s9 186s9 189s9 190s9
+243U14*Put 21|78s25 84s33 90s33 96s25 152s25 158s33 164s33 170s25
+X 16 a-tiinio.ads
+65U14*Put 21|87s25[7|18] 161s25[7|18]
+67i7 Width{15|74I12} 21|87r53[7|18] 161r53[7|18]
+X 20 stack.ads
+1K9*stack 7e10 21|7w6 7r17
+2U11*push 21|179s9 180s9 181s9
+3U11*pop 21|182s9 185s9 188s9
+X 21 sudoku.adb
+10U11*sudoku 10b11 193l5 193t11
+11e9 op{character} 182m13 183r13 185m13 186r13 188m13 189r13 190r13
+14p9 infp{15|52P9} 111m15 114r39 115r21 122m15
+15p9 outfp{15|52P9} 125m17
+16e9 str{character} 115m26 118r53
+17i9 count{integer} 118r29 119m17 119r26
+18A14 grid(integer)<integer><integer> 19r20 28r35 40r37 62r83 74r44
+19a9 puzle_grid{18A14} 143m62 144r33 161r30
+20A14 num_array(integer)<integer> 21r21 61r50
+21a9 puzle_array{20A14} 112m9 118m17 143r37
+22i9 index{integer}
+28V10 recur_sudoku{integer} 28b10 28>23 29>49 30>41 36l5 36t17
+28a23 puzle_grid{18A14}
+29i49 row{integer}
+30i41 column{integer}
+31i9 pos{integer}
+40V18 valid{integer} 40b18 40>25 41>49 42>41 43>41 57l13 57t18
+40a25 puzle_grid{18A14} 49r28 50r28
+41i49 row{integer} 50r39
+42i41 column{integer} 49r41
+43i41 val{integer} 49r51 50r48
+48i21 i{integer} 49r39 50r43
+61U19 polulate_grid 61b19 61>34 62=65 71l13 71t26 143s9
+61a34 puzle_array{20A14} 67r59 143r24
+62a65 puzle_grid{18A14} 67m33 143r50
+63i17 index{integer} 67r71 68m33 68r42
+65i21 row{integer} 67r44
+66i29 column{integer} 67r48
+74U19 put_puzle 74b19 74>30 101l13 101t22 144s9
+74a30 puzle_grid{18A14} 87r30 144r19
+76i21 row{integer} 77r20 77r31 77r41 87r41 95r20
+82i21 column{integer} 83r28 83r42 83r55 87r45 89r28
+150i13 row{integer} 151r20 151r31 151r41 161r41 169r20
+156i21 column{integer} 157r28 157r42 157r55 161r45 163r28
+
