@@ -1,11 +1,7 @@
-
-
 with Ada.Text_IO; use Ada.Text_IO;
 with ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with ada.strings.unbounded; use ada.strings.unbounded;
 with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
---with stack; use stack;
-
 
 
 ------------------------------------------------------------- 	
@@ -28,12 +24,10 @@ procedure sudoku is
 		infp : file_type;
 		str : character;
 		count: integer:=0;
-		
 	begin
 		put("enter full name of sudoku file: ");
-		--get_line(filename, last);
-		--open (infp,in_file,filename(1..last));
-		open (infp,in_file,"file.txt");
+		get_line(filename, last);
+		open (infp,in_file,filename(1..last));
 		
 		new_line;
 		loop exit when end_of_file(infp);
@@ -43,7 +37,6 @@ procedure sudoku is
 				puzzle_array(count) := Character'Pos(str)-48;  --ascii to num
 				count := count +1;
 			end if;
-			
 			if (count=80) then exit; end if;
 		end loop;
 		
@@ -51,10 +44,8 @@ procedure sudoku is
 		put ("There was an error in read file !");
 		raise data_error;
 		end if;
-		
 		close(infp);
 	end open_file;
-	
 
 	------------------------------------------------------------- 	
 	---Procedure: populate puzzle 2d array given number array
@@ -97,10 +88,8 @@ procedure sudoku is
 	------------------------------------------------------------- 	
 	---Function: check if value is valid at pos on puzzle grid
 	-------------------------------------------------------------
-	function valid (puzzle_grid: grid; row:integer;
-					col:integer; val:integer) return boolean is
-	boxrow,boxcol,row1,row2,col1,col2: integer;
-	
+	function valid (puzzle_grid: grid; row,col,val:integer) return boolean is
+		boxrow,boxcol,row1,row2,col1,col2: integer;
 	begin
 		-- check applicable rows and columns 
 		for i in 0..8 loop
@@ -131,17 +120,13 @@ procedure sudoku is
 		return true;
 	end valid;
 	
-	
 	------------------------------------------------------------- 	
 	---Function: solve puzzle using recursion 
 	-------------------------------------------------------------
-	procedure solve_puzzle(puzzle_grid:in out grid; row: in integer; col:in integer; sol: out integer)
+	procedure solve_puzzle(puzzle_grid:in out grid; row,col:in integer; sol: out integer)
 	 is
 	over : integer;
 	begin
-		--put("check");put(row);put(col);new_line;
-		--put_puzzle(puzzle_grid);
-		
 		-- game complete, solution true
 		if row = 9 then 
 			sol := 1; 
@@ -161,13 +146,14 @@ procedure sudoku is
 			return;
 		end if;
 		
+		-- loop through possible numbers, 
+		--recurse for for valid ones to check if part of solution
 		for index in 1..9 loop
 			if (valid(puzzle_grid,row,col,index) ) then 
 				
 				puzzle_grid(row,col) := index;
 				put(index);put(row+1);put(col+1);new_line;
 				--put_puzzle(puzzle_grid);
-				
 				if(col = 8) then
 					solve_puzzle(puzzle_grid,row+1,0,over);
 					if over = 1 then sol := 1;
