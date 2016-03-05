@@ -4,7 +4,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with ada.strings.unbounded; use ada.strings.unbounded;
 with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
-with stack; use stack;
+--with stack; use stack;
 
 
 
@@ -13,12 +13,11 @@ with stack; use stack;
 -------------------------------------------------------------
 procedure sudoku is
 	outfp : file_type;
-	type grid is array(1..9,1..9) of integer;
+	type grid is array(0..8,0..8) of integer;
 	puzzle_grid:grid;
-	type num_array is array(1..81 ) of integer;
+	type num_array is array(0..80 ) of integer;
 	puzzle_array:num_array;
-	a,b,c : integer;
-
+	sol : integer;
 
 	------------------------------------------------------------- 	
 	---Procedure: Open File, parse and put into number array 
@@ -28,7 +27,8 @@ procedure sudoku is
 		last : natural;
 		infp : file_type;
 		str : character;
-		count: integer:=1;
+		count: integer:=0;
+		
 	begin
 		put("enter full name of sudoku file: ");
 		--get_line(filename, last);
@@ -44,10 +44,10 @@ procedure sudoku is
 				count := count +1;
 			end if;
 			
-			if (count=81) then exit; end if;
+			if (count=80) then exit; end if;
 		end loop;
 		
-		if count /= 81 then           --err if array not full 
+		if count /= 80 then           --err if array not full 
 		put ("There was an error in read file !");
 		raise data_error;
 		end if;
@@ -55,15 +55,16 @@ procedure sudoku is
 		close(infp);
 	end open_file;
 	
+
 	------------------------------------------------------------- 	
 	---Procedure: populate puzzle 2d array given number array
 	-------------------------------------------------------------
 	procedure polulate_grid (puzzle_array: in num_array; 
 								puzzle_grid:in out grid) is	
-		index: integer:=1;
+		index: integer:=0;
 	begin
-		for row in 1..9 loop
-			for col in 1..9 loop
+		for row in 0..8 loop
+			for col in 0..8 loop
 				puzzle_grid(row,col) := puzzle_array(index);
 				index := index +1;
 			end loop;
@@ -75,19 +76,19 @@ procedure sudoku is
 	------------------------------------------------------------- 
 	procedure put_puzzle (puzzle_grid:in grid) is	
 	begin
-		for row in 1..9 loop
-			if row = 1 or row =4 or row=7  then
+		for row in 0..8 loop
+			if row = 0 or row =3 or row=6  then
 				put(" +-------+-------+-------+");
 				new_line;
 			end if;
 				
-			for col in 1..9 loop
-				if col = 1 or col =4 or col=7  then put(" |"); end if;
+			for col in 0..8 loop
+				if col = 0 or col =3 or col=6  then put(" |"); end if;
 				put( puzzle_grid(row,col),width =>2);
-				if col=9 then put(" | "); new_line; end if;
+				if col=8 then put(" | "); new_line; end if;
 			end loop;
 			
-			if row = 9 then
+			if row = 8 then
 				put(" +-------+-------+-------+"); new_line;
 			end if;	
 		end loop;
@@ -98,100 +99,112 @@ procedure sudoku is
 	-------------------------------------------------------------
 	function valid (puzzle_grid: grid; row:integer;
 					col:integer; val:integer) return boolean is
-	boxrow,boxcol: integer;
+	boxrow,boxcol,row1,row2,col1,col2: integer;
+	
 	begin
 		-- check applicable rows and columns 
-		for i in 1..9 loop
-			if puzzle_grid(i,col) = val then return false; end if;
-			if puzzle_grid(row,i) = val then return false; end if;
+		for i in 0..8 loop
+			if puzzle_grid(i,col) = val then 
+				return false; 
+			elsif puzzle_grid(row,i) = val then 
+			return false; end if;
 		end loop;
 		
-		-- check current box 
+		-- check applicable box 
 		boxrow := (row/3)*3;
-		boxcol := (col/3)*3;	
-		for r in 1..3 loop
-			for c in 1..3 loop
-				put(r+boxrow);
-				put(c+boxcol);
-				put(puzzle_grid((r+boxrow),(c+boxcol))); new_line;
-				if (puzzle_grid((r+boxrow),(c+boxcol)) = val) then
-					return false;
-				end if ;
-			end loop;
-		end loop;
+		boxcol := (col/3)*3;
+		row1 := (row + 2) rem 3;
+    	row2 := (row + 4) rem 3;
+    	col1 := (col + 2) rem 3;
+    	col2 := (col + 4) rem 3;
+		
+		if puzzle_grid(row1+boxrow,col1+boxcol) = val then
+    		return false;
+    	elsif puzzle_grid(row2+boxrow,col1+boxcol) = val then
+    		return false;
+   		elsif puzzle_grid(row1+boxrow,col2+boxcol) = val then
+   			return false;
+   		elsif puzzle_grid(row2+boxrow,col2+boxcol) = val then
+   			return false;
+   		end if;
 		
 		return true;
 	end valid;
+	
+	
+	------------------------------------------------------------- 	
+	---Function: solve puzzle using recursion 
+	-------------------------------------------------------------
+	procedure solve_puzzle(puzzle_grid:in out grid; row: in integer; col:in integer; sol: out integer)
+	 is
+	over : integer;
+	begin
+		--put("check");put(row);put(col);new_line;
+		--put_puzzle(puzzle_grid);
+		
+		-- game complete, solution true
+		if row = 9 then 
+			sol := 1; 
+			return;
+		end if;
+		
+		-- check if position already filled? onto next cell
+		if (puzzle_grid(row,col) /=0) then
+			if(col = 8) then
+				solve_puzzle(puzzle_grid, row+1, 0,over);
+				if over = 1 then sol := 1; return; end if;
+			else
+				solve_puzzle(puzzle_grid, row, col+1, over);
+				if over = 1 then sol := 1; return; end if;
+			end if;
+			sol := 0;
+			return;
+		end if;
+		
+		for index in 1..9 loop
+			if (valid(puzzle_grid,row,col,index) ) then 
+				
+				puzzle_grid(row,col) := index;
+				put(index);put(row+1);put(col+1);new_line;
+				--put_puzzle(puzzle_grid);
+				
+				if(col = 8) then
+					solve_puzzle(puzzle_grid,row+1,0,over);
+					if over = 1 then sol := 1;
+						return; 
+					end if;
+				else
+					solve_puzzle(puzzle_grid,row,col+1,over);
+					if over = 1 then sol := 1;
+						return; 
+					end if;
+				end if;
+				puzzle_grid(row,col):=0;
+			end if;		
+		end loop;	
+	end solve_puzzle;			
 
 	------------------------------------------------------------- 	
-	---Function: recursive 
+	---Procedure: Write results to file 
 	-------------------------------------------------------------
-	function recur_sudoku(puzzle_grid : grid; row : integer; 
-								 col:integer)return Integer is
-		pos: integer ;
-		begin
-			--loop
-			--end loop;
-			return 1;
-	end recur_sudoku;			
+	procedure write_file(puzzle_grid: in grid) is
+		filename : string(1..50);
+		last : natural;
+		outfp : file_type;
+	begin
+		put("enter file name to output results ");
+		get_line(filename, last);
+		create (outfp,out_file,filename(1..last));
+		set_output(outfp);
+		put_puzzle(puzzle_grid);
+		close(outfp);
+	end write_file;
 
-
-begin
-		-- get filename
-	--	put("enter full name of sudoku file: ");
-	--	get_line(filename, last);
-	--	put_line(filename);
-
-		-- open file and read content put into array	
-	--open (infp,in_file,filename(1..last));
---	open (infp,in_file,"file.txt");
---	puzzle_array:= (1..81 => 0);
---	loop
---		exit when end_of_file(infp);
---		get(infp,str);
-		--put(count); put(" "); put(str); 
-		-- convert ascii value to actual value 
---		puzzle_array(count) := Character'Pos(str)-48;
---		count := count +1;
---	end loop;
---
---	close(infp);
-
-	--create and output to file
---	create (outfp, out_file, "results.txt");
-	--if is_open(outfp) then
-		--set_output(outfp);
-		--close(outfp);
-	--end if;
-
-	--set_output(standard_output);
-
+begin	
 	open_file(puzzle_array =>puzzle_array);
 	polulate_grid (puzzle_array=>puzzle_array, puzzle_grid=>puzzle_grid);
 	put_puzzle(puzzle_grid => puzzle_grid);
-
-
-	
-
-
-a :=4;
-b :=4;
-c :=2;
-
-
-if (valid (puzzle_grid=>puzzle_grid, 
-						row=>a,
-					col=>b,
-				val=>c) ) then 
-				
-				puzzle_grid(a,b):=c;
-				put_puzzle(puzzle_grid);
-				put ("test");
-		end if;
-					
-					
-
-
-
-	
+	solve_puzzle(puzzle_grid, 0, 0, sol);
+	put_puzzle(puzzle_grid);
+	write_file(puzzle_grid);
 end sudoku;

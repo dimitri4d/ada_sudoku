@@ -1,9 +1,9 @@
 V "GNAT Lib v4.6"
 M P W=b
 P SS ZX
-R nnnnnnnnnnvnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+R nnnnnnnnnnvnnnnnnnnnnvnnnvnnnnnnnnnnnvnnnnnnvnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
 
-U sudoku%b		sudoku.adb		6169baf5 NE OO SU IL
+U sudoku%b		sudoku.adb		a27a7ddb NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -11,7 +11,6 @@ W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
 W ada.strings.unbounded.text_io%s  a-suteio.adb	a-suteio.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
-W stack%s		stack.adb		stack.ali
 
 D ada.ads		20070406091342 3ffc8e18
 D a-charac.ads		20070912115821 2d3ec45b
@@ -32,8 +31,7 @@ D a-tiinio.ads		20090409150019 aa04e5d6
 D a-unccon.ads		20070406091342 f9eb8f06
 D interfac.ads		20090409150019 f77d8799
 D i-cstrea.ads		20100622165701 1bd72c32
-D stack.ads		20160302073844 9fb415cb
-D sudoku.adb		20160304193410 f0a7497f
+D sudoku.adb		20160305041024 ac009b9a
 D system.ads		20140416172229 23e1f70b
 D s-crtl.ads		20100617122610 ac77b159
 D s-exctab.ads		20090417131547 66e51330
@@ -52,72 +50,85 @@ D s-traent.ads		20090417130712 5221ee41
 D s-unstyp.ads		20090409150019 6ae15c76
 D s-wchcon.ads		20090417130712 bfeb2e3d
 X 1 ada.ads
-16K9*Ada 19e8 21|3r6 3r23 4r6 4r31 5r6 5r33 6r6 6r41
+16K9*Ada 19e8 20|3r6 3r23 4r6 4r31 5r6 5r33 6r6 6r41
 X 7 a-inteio.ads
-18K13*Integer_Text_IO[16|45] 21|4w10 4r35
+18K13*Integer_Text_IO[16|45] 20|4w10 4r35
 X 10 a-string.ads
-16K13*Strings 35e16 21|5r10 5r37 6r10 6r45
+16K13*Strings 35e16 20|5r10 5r37 6r10 6r45
 X 12 a-strunb.ads
-77K21*Unbounded 490e26 21|5w18 5r45 6r18 6r53
+77K21*Unbounded 490e26 20|5w18 5r45 6r18 6r53
 X 13 a-suteio.ads
-39K31*Text_IO 61e34 21|6w28 6r63
+39K31*Text_IO 61e34 20|6w28 6r63
 X 15 a-textio.ads
-49K13*Text_IO 472e16 21|3w10 3r27
-52P9*File_Type(370R9) 21|15r17 29r24
-53n23*In_File{53E9} 21|36r28
+49K13*Text_IO 472e16 20|3w10 3r27
+52P9*File_Type(370R9) 20|15r17 28r24 193r25
+53n23*In_File{53E9} 20|36r28
+53n32*Out_File{53E9} 20|197r31
 74I12*Field{integer}
-93U14*Open 21|36s17
-99U14*Close 21|55s17
-167U14*New_Line 21|38s17 106s74 127s33 133s59 137s68
-184V13*End_Of_File{boolean} 21|39s32
-206U14*Get 21|40s25
-243U14*Put 21|33s17 51s17 126s33 131s69 133s47 137s33 193s33
-299X4*Data_Error 21|52r23
+87U14*Create 20|197s17
+93U14*Open 20|36s17
+99U14*Close 20|55s17 200s17
+115U14*Set_Output 20|198s17
+167U14*New_Line 20|38s17 82s33 88s59 92s68 168s66
+184V13*End_Of_File{boolean} 20|39s32
+206U14*Get 20|40s25
+243U14*Put 20|33s17 51s17 81s33 86s69 88s47 92s33 195s17
+250U14*Get_Line 20|196s17
+299X4*Data_Error 20|52r23
 X 16 a-tiinio.ads
-65U14*Put 21|104s33[7|18] 105s33[7|18] 106s33[7|18] 132s33[7|18]
-67i7 Width{15|74I12} 21|132r59[7|18]
-X 20 stack.ads
-1K9*stack 7e10 21|7w6 7r17
-X 21 sudoku.adb
-14U11*sudoku 14b11 201l5 201t11
+65U14*Put 20|87s33[7|18] 168s33[7|18] 168s44[7|18] 168s55[7|18]
+67i7 Width{15|74I12} 20|87r59[7|18]
+X 20 sudoku.adb
+14U11*sudoku 14b11 210l5 210t11
 15p9 outfp{15|52P9}
-16A14 grid(integer)<integer><integer> 17r21 62r84 76r45 89r38 122r46
-17a9 puzzle_grid{16A14} 174m65 175r35 186r25 191m33 192r44
-18A14 num_array(integer)<integer> 19r22 26r47 61r51
-19a9 puzzle_array{18A14} 173m34 174r38
-20i9 a{integer} 181m1 187r54 191r45
-20i11 b{integer} 182m1 188r46 191r47
-20i13 c{integer} 183m1 189r38 191r51
-26U19 open_file 26b19 26<29 56l13 56t22 173s9
-26a29 puzzle_array{18A14} 43m33 173r19
-27a17 filename{string}
-28i17 last{natural}
-29p17 infp{15|52P9} 36m23 39r44 40r29 55m23
-30e17 str{character} 40m34 42r42 43r70
-31i17 count{integer} 43r46 44m33 44r42 47r29 50r20
-61U19 polulate_grid 61b19 61>34 62=65 71l13 71t26 174s9
-61a34 puzzle_array{18A14} 67r57 174r24
-62a65 puzzle_grid{16A14} 67m33 174r52
-63i17 index{integer} 67r70 68m33 68r42
-65i21 row{integer} 67r45
-66i29 col{integer} 67r49
-76V18 recur_sudoku{integer} 76b18 76>31 76>51 77>66 83l13 83t25
-76a31 puzzle_grid{16A14}
-76i51 row{integer}
-77i66 col{integer}
-78i17 pos{integer}
-89V18 valid{boolean} 89b18 89>25 89>44 90>41 90>54 114l13 114t18 186s5
-89a25 puzzle_grid{16A14} 95r28 96r28 106r37 107r37 186r12
-89i44 row{integer} 96r40 100r28 187r49
-90i41 col{integer} 95r42 101r28 188r41
-90i54 val{integer} 95r49 96r49 107r74 189r33
-91i9 boxrow{integer} 100m17 104r39 106r52 107r52
-91i16 boxcol{integer} 101m17 105r39 106r63 107r63
-94i21 i{integer} 95r40 96r44
-102i21 r{integer} 104r37 106r50 107r50
-103i29 c{integer} 105r37 106r61 107r61
-122U19 put_puzzle 122b19 122>31 140l13 140t23 175s9 192s33
-122a31 puzzle_grid{16A14} 132r38 175r20
-124i21 row{integer} 125r28 125r39 125r49 132r50 136r28
-130i29 col{integer} 131r36 131r47 131r57 132r54 133r36
+16A14 grid(integer)<integer><integer> 17r21 63r84 77r46 100r38 138r51 190r46
+17a9 puzzle_grid{16A14} 205m65 206r35 207m22 208r20 209r20
+18A14 num_array(integer)<integer> 19r22 25r47 62r51
+19a9 puzzle_array{18A14} 204m34 205r38
+20i9 sol{integer} 207m41
+25U19 open_file 25b19 25<29 56l13 56t22 204s9
+25a29 puzzle_array{18A14} 43m33 204r19
+26a17 filename{string}
+27i17 last{natural}
+28p17 infp{15|52P9} 36m23 39r44 40r29 55m23
+29e17 str{character} 40m34 42r42 43r70
+30i17 count{integer} 43r46 44m33 44r42 47r29 50r20
+62U19 polulate_grid 62b19 62>34 63=65 72l13 72t26 205s9
+62a34 puzzle_array{18A14} 68r57 205r24
+63a65 puzzle_grid{16A14} 68m33 205r52
+64i17 index{integer} 68r70 69m33 69r42
+66i21 row{integer} 68r45
+67i29 col{integer} 68r49
+77U19 put_puzzle 77b19 77>31 95l13 95t23 199s17 206s9 208s9
+77a31 puzzle_grid{16A14} 87r38 206r20
+79i21 row{integer} 80r28 80r39 80r49 87r50 91r28
+85i29 col{integer} 86r36 86r47 86r57 87r54 88r36
+100V18 valid{boolean} 100b18 100>25 100>44 101>41 101>54 132l13 132t18 165s29
+100a25 puzzle_grid{16A14} 107r28 109r31 121r20 123r15 125r23 127r23
+100i44 row{integer} 109r43 114r28 116r26 117r18
+101i41 col{integer} 107r42 115r28 118r18 119r18
+101i54 val{integer} 107r49 109r52 121r59 123r54 125r62 127r62
+102i9 boxrow{integer} 114m17 121r37 123r32 125r40 127r40
+102i16 boxcol{integer} 115m17 121r49 123r44 125r52 127r52
+102i23 row1{integer} 116m17 121r32 125r35
+102i28 row2{integer} 117m9 123r27 127r35
+102i33 col1{integer} 118m9 121r44 123r39
+102i38 col2{integer} 119m9 125r47 127r47
+106i21 i{integer} 107r40 109r47
+138U19 solve_puzzle 138b19 138=32 138>57 138>74 138<90 154s33 157s33 172s41
+. 177s41 185l13 185t25 207s9
+138a32 puzzle_grid{16A14} 152r21 154m46 157m46 165r35 167m33 172m54 177m54
+. 182m33
+138i57 row{integer} 146r20 152r33 154r59 157r59 165r47 167r45 168r48 172r66
+. 177r66 182r45
+138i74 col{integer} 152r37 153r28 157r64 165r51 167r49 168r59 171r36 177r70
+. 182r49
+138i90 sol{integer} 147m25 155m50 158m50 160m25 173m58 178m58
+140i9 over{integer} 154m68 155r36 157m71 158r36 172m74 173r44 177m76 178r44
+164i21 index{integer} 165r55 167r57 168r37
+190U19 write_file 190b19 190>30 201l13 201t23 209s9
+190a30 puzzle_grid{16A14} 199r28
+191a17 filename{string} 196m26 197r40
+192i17 last{natural} 196m36 197r52
+193p17 outfp{15|52P9} 197m25 198r28 200m23
 
